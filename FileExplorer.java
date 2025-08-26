@@ -33,6 +33,7 @@ public class FileExplorer {
                     case "rm" -> deleteFileOrDirectory(argument);
                     case "info" -> displayFileInfo(argument);
                     case "help" -> displayHelp();
+                    case "clear" -> clearScreen();
                     case "exit" -> {
                         System.out.println("Goodbye.");
                         return;
@@ -160,8 +161,13 @@ public class FileExplorer {
                   exit            Exit the program
                 """);
     }
+    private void clearScreen(){
+        System.out.print("\033[H\033[2J");
+        System.out.flush();
+    }
 
     public static void main(String[] args) {
         new FileExplorer().start();
     }
 }
+
