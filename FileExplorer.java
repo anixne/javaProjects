@@ -1,5 +1,7 @@
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Scanner;
 
 public class FileExplorer {
@@ -139,13 +141,18 @@ public class FileExplorer {
             return;
         }
 
+        long fileLastModified = file.lastModified();
+        Date date = new Date(fileLastModified);
+        SimpleDateFormat simepleDateFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");
+        String myDate = simepleDateFormat.format(date);
+
         System.out.println("Name:      " + file.getName());
         System.out.println("Path:      " + file.getAbsolutePath());
         System.out.println("Type:      " + (file.isDirectory() ? "Directory" : "File"));
         System.out.println("Readable:  " + file.canRead());
         System.out.println("Writable:  " + file.canWrite());
         System.out.println("Size:      " + file.length() + " bytes");
-        System.out.println("Modified:  " + file.lastModified());
+        System.out.println("Last Modified:  " + myDate);
     }
 
     private void displayHelp() {
@@ -158,8 +165,8 @@ public class FileExplorer {
                   rm <name>       Delete file or directory
                   info <name>     Show file details
                   help            Show this help message
-                  clear           Clean the terminal
                   exit            Exit the program
+                  clear           Clear the console screen
                 """);
     }
     private void clearScreen(){
@@ -171,4 +178,3 @@ public class FileExplorer {
         new FileExplorer().start();
     }
 }
-
