@@ -158,6 +158,7 @@ public class FileExplorer {
                   rm <name>       Delete file or directory
                   info <name>     Show file details
                   help            Show this help message
+                  clear           Clean the terminal
                   exit            Exit the program
                 """);
     }
