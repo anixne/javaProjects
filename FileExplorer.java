@@ -36,6 +36,7 @@ public class FileExplorer {
                     case "info" -> displayFileInfo(argument);
                     case "help" -> displayHelp();
                     case "clear" -> clearScreen();
+                    case "cat" -> CatFunction(argument);
                     case "exit" -> {
                         System.out.println("Goodbye.");
                         return;
@@ -167,6 +168,7 @@ public class FileExplorer {
                   help            Show this help message
                   exit            Exit the program
                   clear           Clear the console screen
+                  cat <name>      Display file contents
                 """);
     }
     private void clearScreen(){
@@ -174,6 +176,27 @@ public class FileExplorer {
         System.out.flush();
     }
 
+    private void CatFunction(String name){
+        if(name.isEmpty()){
+            System.out.println("Please provide a file name");
+        }else{
+            File file = new File(currentDirectory, name);
+            if(!file.exists()){
+                System.out.println("File not found");
+                return;
+            }if(file.isDirectory()){
+                System.out.println("Cannot display contents of a directory");
+                return;
+            }
+            try(Scanner fileScanner = new Scanner(file)){
+                while(fileScanner.hasNextLine()){
+                    System.out.println(fileScanner.nextLine());
+                }
+            }catch(IOException e){
+                System.out.println("Error reading file :" + e.getMessage());
+            }
+        }
+    }
     public static void main(String[] args) {
         new FileExplorer().start();
     }
