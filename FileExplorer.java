@@ -37,6 +37,7 @@ public class FileExplorer {
                     case "help" -> displayHelp();
                     case "clear" -> clearScreen();
                     case "cat" -> CatFunction(argument);
+                    case "pwd" -> pwdFunction();
                     case "exit" -> {
                         System.out.println("Goodbye.");
                         return;
@@ -169,6 +170,7 @@ public class FileExplorer {
                   exit            Exit the program
                   clear           Clear the console screen
                   cat <name>      Display file contents
+                  pwd             Show current directory path
                 """);
     }
     private void clearScreen(){
@@ -195,6 +197,13 @@ public class FileExplorer {
             }catch(IOException e){
                 System.out.println("Error reading file :" + e.getMessage());
             }
+        }
+    }
+    private void pwdFunction(){
+        try {
+            System.out.println("Current Direcctory: " + currentDirectory.getCanonicalPath());
+        } catch (IOException e) {
+            System.out.println("Error getting current directory: " + e.getMessage());
         }
     }
     public static void main(String[] args) {
